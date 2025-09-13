@@ -93,6 +93,8 @@ public class TranscodingSettings {
 					matchedMimeType = HTTPResource.AUDIO_WAV_TYPEMIME;
 				} else if (getEncodingFormat().isTranscodeToMP3()) {
 					matchedMimeType = HTTPResource.AUDIO_MP3_TYPEMIME;
+				} else if (getEncodingFormat().isTranscodeToOPUS()) {
+					matchedMimeType = HTTPResource.AUDIO_OGA_TYPEMIME;
 				} else {
 					// Default audio transcoding mime type
 					matchedMimeType = HTTPResource.AUDIO_LPCM_TYPEMIME;

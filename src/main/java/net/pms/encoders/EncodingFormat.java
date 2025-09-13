@@ -32,6 +32,7 @@ public class EncodingFormat {
 	private static final String LPCM = "LPCM";
 	private static final String MP3 = "MP3";
 	private static final String WAV = "WAV";
+	private static final String OPUS = "OPUS";
 
 	/**
 	 * video transcoding options.
@@ -51,7 +52,9 @@ public class EncodingFormat {
 	public static final Map<String, EncodingFormat> AUDIO = Map.ofEntries(
 			Map.entry(LPCM, new EncodingFormat(LPCM, FormatConfiguration.LPCM, FormatConfiguration.LPCM)),
 			Map.entry(MP3, new EncodingFormat(MP3, FormatConfiguration.MP3, FormatConfiguration.MP3)),
-			Map.entry(WAV, new EncodingFormat(WAV, FormatConfiguration.WAV, FormatConfiguration.WAV))
+			Map.entry(WAV, new EncodingFormat(WAV, FormatConfiguration.WAV, FormatConfiguration.WAV)),
+			Map.entry(OPUS, new EncodingFormat(OPUS, FormatConfiguration.OPUS, FormatConfiguration.OPUS))
+
 	);
 
 	public static final Map<String, EncodingFormat> VIDEO = Map.ofEntries(
@@ -117,6 +120,10 @@ public class EncodingFormat {
 
 	public boolean isTranscodeToWAV() {
 		return WAV.equals(name);
+	}
+
+	public boolean isTranscodeToOPUS() {
+		return OPUS.equals(name);
 	}
 
 	public boolean isTranscodeToWMV() {

@@ -1,119 +1,30 @@
-# Universal Media Server
-![Universal Media Server CI](https://github.com/UniversalMediaServer/UniversalMediaServer/workflows/CI/badge.svg) [![Crowdin](https://badges.crowdin.net/universalmediaserver/localized.svg)](https://crowdin.com/project/universalmediaserver)
+# Universal Music Server
 
-[<img align="right" src="https://github.com/UniversalMediaServer/UniversalMediaServer/blob/main/src/main/resources/images/logo.png?raw=true" alt="Universal Media Server" width="256" height="auto"/>][1] Universal Media Server is a DLNA, UPnP and HTTP/S Media Server.
-It is capable of sharing video, audio and images between most modern devices.
-It was originally based on PS3 Media Server by shagrath, in order to ensure greater stability and file-compatibility.
+Universal Music Server (UMUS) plans to be a fork of [Universal Media Server](https://www.universalmediaserver.com/) that is geared toward audio only use. 
 
-Universal Media Server supports all major operating systems, with versions for Windows, Linux and macOS.
-The program streams or transcodes many different media formats with little or no configuration.
-It is powered by [FFmpeg][27], [MediaInfo][28], [Crowdin][29], [MEncoder][26], tsMuxeR, AviSynth, VLC and more, which combine to offer support for a wide range of media formats.
+Currently it is just standard [UMS](https://github.com/UniversalMediaServer/UniversalMediaServer/) with additional audio transcoding support. I have not started removing video support.
 
-## Current Project Members
+## Build & Use Instructions
 
-* [ik666][32]
-* [js-kyle][31]
-* [mik_s][7]
-* [SubJunk][3]
-* [SurfaceS][33]
-* [valib][5]
+Build as you would normal UMS. Add the following to your renderer config:
 
-## Sponsors
+`TranscodeAudio = OPUS`
 
-* [Architecture of Sales][35]
+This will set the transcode format to the default of Opus @ 128kbps. To use a different bitrate, specify it in the renderer config:
 
-[Become a sponsor][36]
+`CustomFFmpegAudioOptions = -b:a 96k`
 
-## Links
+substituing 96 for the approximate bitrate you want. I'm digging through ffmpeg/libopus docs to see if we can pass q values.
 
-* [Website][1]
-* [Forum][9]
-* [Source code][10]
-* [Official Releases][11]
-* [Issue tracker][12]
-* [Knowledge Base][13]
-* [Infrastructure status][37]
-* [Comparison of popular media servers][2]
+## The Big Picture
 
-## Thanks
+I'm basically on this roll of "nothing works how I want so I'm going to build something that does". I sat down trying to piece together how I'd give another crack at being my own music streaming service; and I didn't like what was out there. It felt like they were telling me how to handle my music, or refusing to let me do things ways they didn't understand. 
 
-##### Thanks for major code contributions:
+The biggest thing UMS didn't do out of the box was transcode to Opus. This turned out to be stupidly simple to add. It was mostly just modifying the ffmpeg parser and the renderer config parsing. Even if I don't get the video ripped out of it successfully; maybe they'll merge the audio codec changes. I mean I'm going to submit them anyway. That's just something the program should have.
 
-* chocolateboy
-* ditlew
-* ExSport
-* happy.neko
-* [infidel][6]
-* [Nadahar][15]
-* Raptor399
-* Redlum
-* renszarv
-* [SharkHunter][4]
-* skeptical
-* taconaut
-* tcox
-* [threedguru][34]
-* tomeko
+There's a client side to this I need to work on. Right now it's looking like modifying YAACC or maybe starting from scratch with something.
 
-##### Thanks for documentation and contributions to the community:
-
-* DeFlanko
-* meskibob
-* Optimus_prime
-* otmanix
-* [squadjot][30]
-
-##### Thanks for significant/frequent language translations:
-
-* [AlfredoRamos][19]
-* [josepma][16]
-* [kaolsz][23]
-* [Kirvx][17]
-* [leroy][18]
-* [OnarEngincan][22]
-* [prescott_sk][24]
-* [squadjot][21]
-* [Tianuchka][20]
-
-##### Special Thanks: 
-
-* boblinds and snoots for the network test cases :)
-* sarraken, bleuecinephile, bd.azerty, fabounnet for the support and feedback
-* ...And you!
-
-
-  [1]: https://www.universalmediaserver.com
-  [2]: https://www.universalmediaserver.com/comparison/
-  [3]: https://www.universalmediaserver.com/forum/memberlist.php?mode=viewprofile&u=2
-  [4]: https://www.universalmediaserver.com/forum/memberlist.php?mode=viewprofile&u=62
-  [5]: https://www.universalmediaserver.com/forum/memberlist.php?mode=viewprofile&u=683
-  [6]: https://www.universalmediaserver.com/forum/memberlist.php?mode=viewprofile&u=171
-  [7]: https://www.universalmediaserver.com/forum/memberlist.php?mode=viewprofile&u=10450
-  [8]: https://www.universalmediaserver.com/forum/memberlist.php?mode=viewprofile&u=1194
-  [9]: https://www.universalmediaserver.com/forum
-  [10]: https://github.com/UniversalMediaServer/UniversalMediaServer
-  [11]: https://www.universalmediaserver.com/downloads/
-  [12]: https://github.com/UniversalMediaServer/UniversalMediaServer/issues?state=open
-  [13]: https://support.universalmediaserver.com
-  [15]: https://www.universalmediaserver.com/forum/memberlist.php?mode=viewprofile&u=4025
-  [16]: https://github.com/josepma
-  [17]: https://github.com/kirvx
-  [18]: https://github.com/ler0y
-  [19]: https://github.com/AlfredoRamos
-  [20]: https://www.universalmediaserver.com/forum/memberlist.php?mode=viewprofile&u=573
-  [21]: https://github.com/squadjot
-  [22]: https://crowdin.com/profile/OnarEngincan
-  [23]: https://github.com/K4r0lSz
-  [24]: https://github.com/prescott66
-  [26]: http://www.mplayerhq.hu/
-  [27]: https://www.ffmpeg.org/
-  [28]: https://mediaarea.net/en/MediaInfo
-  [29]: https://crowdin.com/
-  [30]: https://www.universalmediaserver.com/forum/memberlist.php?mode=viewprofile&u=55
-  [31]: https://github.com/js-kyle
-  [32]: https://github.com/ik666
-  [33]: https://github.com/SurfaceS
-  [34]: https://github.com/threedguru
-  [35]: https://architectureofsales.com
-  [36]: https://www.patreon.com/universalmediaserver
-  [37]: https://stats.uptimerobot.com/k0YIB5IOhL
+## Changes
+```
+13-SEP-2025: Initial fork and commit. Add Opus as audio transcode format.
+```

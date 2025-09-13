@@ -185,12 +185,27 @@ public class FFmpegAudio extends FFMpegVideo {
 				cmdList.add("-f");
 				cmdList.add("wav");
 			}
+		} else if (encodingFormat.isTranscodeToOPUS()) {
+			if (!customFFmpegAudioOptions.contains("-c:a ")) {
+				cmdList.add("-c:a");
+				cmdList.add("libopus");
+			}
+			if (!customFFmpegAudioOptions.contains("-b:a ")) {
+				cmdList.add("-b:a");
+				cmdList.add("128k");
+			}
+			if (!customFFmpegAudioOptions.contains("-f ")) {
+				cmdList.add("-f");
+				cmdList.add("ogg");
+			}
 		} else { // default: LPCM
 			if (!customFFmpegAudioOptions.contains("-f ")) {
 				cmdList.add("-f");
 				cmdList.add("s16be");
 			}
 		}
+
+
 
 		if (configuration.isAudioResample()) {
 			if (renderer.isTranscodeAudioTo441()) {
@@ -218,6 +233,9 @@ public class FFmpegAudio extends FFMpegVideo {
 
 		String[] cmdArray = new String[ cmdList.size() ];
 		cmdList.toArray(cmdArray);
+
+		// Log the command being executed for debugging
+		LOGGER.info("FFmpeg audio transcode command: {}", String.join(" ", cmdArray));
 
 		ProcessWrapperImpl pw = new ProcessWrapperImpl(cmdArray, params);
 		pw.runInNewThread();
