@@ -198,6 +198,19 @@ public class FFmpegAudio extends FFMpegVideo {
 				cmdList.add("-f");
 				cmdList.add("ogg");
 			}
+		} else if (encodingFormat.isTranscodeToAAC()) {
+			if (!customFFmpegAudioOptions.contains("-c:a ")) {
+				cmdList.add("-c:a");
+				cmdList.add("aac");
+			}
+			if (!customFFmpegAudioOptions.contains("-b:a ")) {
+				cmdList.add("-b:a");
+				cmdList.add("128k");
+			}
+			if (!customFFmpegAudioOptions.contains("-f ")) {
+				cmdList.add("-f");
+				cmdList.add("adts");
+			}
 		} else { // default: LPCM
 			if (!customFFmpegAudioOptions.contains("-f ")) {
 				cmdList.add("-f");

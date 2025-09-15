@@ -27,12 +27,13 @@ import net.pms.configuration.FormatConfiguration;
 public class EncodingFormat {
 
 	/**
-	 * audio transcoding options.
+	 * audio transcoding options. AACA avoids confusion with video AAC code.
 	 */
 	private static final String LPCM = "LPCM";
 	private static final String MP3 = "MP3";
 	private static final String WAV = "WAV";
 	private static final String OPUS = "OPUS";
+	private static final String AAC = "AAC";
 
 	/**
 	 * video transcoding options.
@@ -53,7 +54,8 @@ public class EncodingFormat {
 			Map.entry(LPCM, new EncodingFormat(LPCM, FormatConfiguration.LPCM, FormatConfiguration.LPCM)),
 			Map.entry(MP3, new EncodingFormat(MP3, FormatConfiguration.MP3, FormatConfiguration.MP3)),
 			Map.entry(WAV, new EncodingFormat(WAV, FormatConfiguration.WAV, FormatConfiguration.WAV)),
-			Map.entry(OPUS, new EncodingFormat(OPUS, FormatConfiguration.OPUS, FormatConfiguration.OPUS))
+			Map.entry(OPUS, new EncodingFormat(OPUS, FormatConfiguration.OPUS, FormatConfiguration.OPUS)),
+			Map.entry(AAC, new EncodingFormat(AAC, FormatConfiguration.AAC_LC, FormatConfiguration.AAC_LC))
 
 	);
 
@@ -142,7 +144,7 @@ public class EncodingFormat {
 	}
 
 	/**
-	 * @return whether to use the AAC audio codec for transcoded video
+	 * @return whether to use the AAC audio codec for transcoding
 	 */
 	public boolean isTranscodeToAAC() {
 		return FormatConfiguration.AAC_LC.equals(getTranscodingAudioCodec());

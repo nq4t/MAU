@@ -27,5 +27,5 @@ There's a client side to this I need to work on. Right now it's looking like mod
 ## Changes
 ```
 13-SEP-2025: Initial fork and commit. Add Opus as audio transcode format.
-14-SEP-2025: Rebranding as MAU.
+14-SEP-2025: Rebranding as MAU. Add AAC Transcoding.
 ```
